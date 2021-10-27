@@ -1,10 +1,14 @@
 import React from 'react';
 import "./ToDoItem.css";
 import Checkbox from '@mui/material/Checkbox';
+import { useDispatch } from "react-redux";
+import { toggleCheck } from '../features/toDoSlice';
 
 function ToDoItem(props) {
-  function handleChange() {
-    props.toggleDone(props.id);
+  const dispatch = useDispatch();
+
+  function handleCheck() {
+    dispatch(toggleCheck(props.id));
   }
 
   return (
@@ -12,7 +16,7 @@ function ToDoItem(props) {
       <Checkbox
         checked={props.done}
         color="primary"
-        onChange={handleChange}
+        onChange={handleCheck}
         inputProps={{ 'aria-label': 'controlled' }}
       />
       <p className={props.done && "todo-item-done"}>{props.name}</p>

@@ -10,10 +10,17 @@ const toDoSlice = createSlice({
   reducers: {
     saveTodo: (state, action) => {
       state.toDoList.push(action.payload);
-    }  
+    },
+    toggleCheck: (state, action) => {
+      state.toDoList.forEach(item => {
+        if(action.payload === item.id) {
+          item.done = !item.done;
+        }
+      })
+    }
   }
 });
 
-export const { saveTodo } = toDoSlice.actions
+export const { saveTodo, toggleCheck } = toDoSlice.actions
 export const selectToDoList = state => state.todos.toDoList
 export default toDoSlice.reducer
